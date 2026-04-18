@@ -93,7 +93,7 @@ export function setMeta({ title, description, image } = {}) {
   updateMetaTag("property", "og:title", fullTitle);
   updateMetaTag("property", "og:description", description || "Personal audio library built for smooth listening.");
   updateMetaTag("property", "og:url", window.location.href);
-  updateMetaTag("property", "og:image", image ? buildAppUrl(image) : buildAppUrl("assets/icons/favicon.svg"));
+  updateMetaTag("property", "og:image", image ? buildAppUrl(image) : buildAppUrl("FuckSC.png"));
 }
 
 function updateMetaTag(attribute, name, content) {
