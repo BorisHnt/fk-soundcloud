@@ -26,69 +26,71 @@ export function renderView(viewName, context) {
 }
 
 function renderHome({ library }) {
-  const latestReleases = sortByDateDesc(library.releases).slice(0, 4);
-  const featuredTracks = sortByDateDesc(library.tracks).slice(0, 6);
+  const latestReleases = sortByDateDesc(library.releases).slice(0, 6);
+  const recentTracks = sortByDateDesc(library.tracks).slice(0, 8);
   const featuredArtists = library.artists.slice(0, 6);
-  const heroRelease = latestReleases[0];
+  const corePlaylists = library.playlists.filter((playlist) => playlist.type !== "artist").slice(0, 3);
   const allTracks = library.playlists.find((playlist) => playlist.type === "all-tracks");
-  const latestPlaylist = library.playlists.find((playlist) => playlist.type === "latest-releases");
 
   setMeta({
     title: "Home",
-    description: "Dark, minimal personal music platform for listening to releases, artists and playlists.",
-    image: heroRelease?.coverPath || latestPlaylist?.coverPath || null,
+    description: "Personal music library with direct access to releases, artists, playlists and persistent playback.",
+    image: latestReleases[0]?.coverPath || corePlaylists[0]?.coverPath || null,
   });
 
   return {
     html: `
-      <section class="hero">
-        <div class="hero__copy">
-          <span class="eyebrow">Personal Audio Platform</span>
-          <h1>Own the stream, keep the music close.</h1>
-          <p>A minimal dark interface for listening to every release in one place, without the noise of external platforms.</p>
-          <div class="hero__actions">
-            <button type="button" class="button button--primary" data-play-playlist-id="${escapeHtml(allTracks?.id || "")}">Play all tracks</button>
-            <a class="button button--ghost" href="playlists.html">Browse playlists</a>
-            <button type="button" class="button button--ghost" data-open-search>Quick search</button>
+      <section class="home-overview card">
+        <div class="home-overview__head">
+          <div>
+            <h1>Library</h1>
+            <div class="meta-row meta-row--tight">
+              <span>${pluralize(library.stats.releaseCount, "release")}</span>
+              <span>${pluralize(library.stats.trackCount, "track")}</span>
+              <span>${pluralize(library.stats.artistCount, "artist")}</span>
+            </div>
           </div>
-          <div class="hero__stats">
-            ${createMetricCard(library.stats.artistCount, "artists")}
-            ${createMetricCard(library.stats.releaseCount, "releases")}
-            ${createMetricCard(library.stats.trackCount, "tracks")}
+          <div class="toolbar toolbar--dense">
+            <button type="button" class="button button--primary button--small" data-play-playlist-id="${escapeHtml(allTracks?.id || "")}">Play all</button>
+            <a class="button button--ghost button--small" href="playlist.html?type=all">All tracks</a>
+            <a class="button button--ghost button--small" href="playlists.html">Playlists</a>
+            <button type="button" class="button button--ghost button--small" data-open-search>Search</button>
           </div>
         </div>
-        <aside class="hero__highlight card card--hero">
-          ${heroRelease ? createReleaseFeature(heroRelease) : createEmptyCard("No release detected yet", "Run the library generator after dropping music into musics/.")}
+      </section>
+
+      <section class="home-grid">
+        <div class="home-grid__main">
+          <section class="section section--flush">
+            ${createSectionHeader("Latest releases", null, "artists.html", "Artists")}
+            <div class="card-grid card-grid--releases">
+              ${latestReleases.map((release) => createReleaseCard(release)).join("")}
+            </div>
+          </section>
+
+          <section class="section section--flush">
+            ${createSectionHeader("Recently added", null, "playlist.html?type=all", "All tracks")}
+            <div class="track-list card">
+              ${recentTracks.map((track) => createTrackRow(track, { contextType: "all" })).join("")}
+            </div>
+          </section>
+        </div>
+
+        <aside class="home-grid__side">
+          <section class="section section--flush">
+            ${createSectionHeader("Playlists", null, "playlists.html", "Open")}
+            <div class="playlist-stack">
+              ${corePlaylists.map((playlist) => createPlaylistCard(playlist, library)).join("")}
+            </div>
+          </section>
+
+          <section class="section section--flush">
+            ${createSectionHeader("Artists", null, "artists.html", "All")}
+            <div class="card-grid card-grid--artists-compact">
+              ${featuredArtists.map((artist) => createArtistCard(artist)).join("")}
+            </div>
+          </section>
         </aside>
-      </section>
-
-      <section class="section">
-        ${createSectionHeader("Latest releases", "Newest uploads surfaced directly from the repo.", "artists.html", "Explore artists")}
-        <div class="card-grid card-grid--releases">
-          ${latestReleases.map((release) => createReleaseCard(release)).join("")}
-        </div>
-      </section>
-
-      <section class="section">
-        ${createSectionHeader("Featured tracks", "Fast access to the most recent additions.", "playlist.html?type=all", "Open all tracks")}
-        <div class="track-list card">
-          ${featuredTracks.map((track) => createTrackRow(track, { contextType: "all" })).join("")}
-        </div>
-      </section>
-
-      <section class="section section--split">
-        <div>
-          ${createSectionHeader("Artists", "Every artist currently available in the catalog.", "artists.html", "See all")}
-          <div class="card-grid card-grid--artists">
-            ${featuredArtists.map((artist) => createArtistCard(artist)).join("")}
-          </div>
-        </div>
-        <div>
-          ${createSectionHeader("Quick playlists", "Auto-generated listening flows.", "playlists.html", "All playlists")}
-          <div class="playlist-stack">
-            ${[allTracks, latestPlaylist].filter(Boolean).map((playlist) => createPlaylistCard(playlist, library)).join("")}
-          </div>
-        </div>
       </section>
     `,
   };
@@ -97,31 +99,33 @@ function renderHome({ library }) {
 function renderArtists({ library }) {
   setMeta({
     title: "Artists",
-    description: "Browse every artist, release count and direct artist playlists from the library.",
+    description: "Artists, release counts and direct artist playback.",
     image: library.artists[0]?.coverPath || null,
   });
 
   return {
     html: `
-      <section class="page-header">
+      <section class="page-header page-header--compact">
         <div>
-          <span class="eyebrow">Artists</span>
-          <h1>Every artist, one clean index.</h1>
-          <p>Open a dedicated page, launch the full artist playlist, or jump directly to the latest release.</p>
+          <h1>Artists</h1>
+          <div class="meta-row meta-row--tight">
+            <span>${pluralize(library.stats.artistCount, "artist")}</span>
+            <span>${pluralize(library.stats.releaseCount, "release")}</span>
+          </div>
         </div>
-        <div class="toolbar">
+        <div class="toolbar toolbar--dense">
           <label class="field">
             <span>Sort</span>
             <select data-artist-sort>
               <option value="name">Name</option>
-              <option value="releases">Release count</option>
-              <option value="latest">Latest release</option>
+              <option value="releases">Releases</option>
+              <option value="latest">Latest</option>
             </select>
           </label>
         </div>
       </section>
 
-      <div class="card-grid card-grid--artists" data-artist-grid>
+      <div class="card-grid card-grid--artists-page" data-artist-grid>
         ${library.artists.map((artist) => createArtistCard(artist)).join("")}
       </div>
     `,
@@ -174,30 +178,34 @@ function renderArtist({ library, params }) {
 
   return {
     html: `
-      <section class="artist-hero">
-        <div class="artist-hero__backdrop">${createArtworkMarkup(artist, { sizeClass: "artwork--hero" })}</div>
-        <div class="artist-hero__copy">
-          <span class="eyebrow">Artist</span>
-          <h1>${escapeHtml(artist.name)}</h1>
-          <p>${pluralize(artist.releaseCount, "release")} &middot; ${pluralize(artist.trackCount, "track")}</p>
-          <div class="tag-row">${artist.genres.length ? artist.genres.map(createTag).join("") : createTag("Independent catalog")}</div>
-          <div class="hero__actions">
-            <button type="button" class="button button--primary" data-play-artist-slug="${escapeHtml(artist.slug)}">Play artist playlist</button>
-            <a class="button button--ghost" href="${escapeHtml(resolvePlaylistPath("artist", artist.slug))}">Open playlist</a>
-            <button type="button" class="button button--ghost" data-share-path="${escapeHtml(resolveArtistPath(artist.slug))}" data-share-title="${escapeHtml(artist.name)}" data-share-text="Artist page">Share</button>
+      <section class="artist-panel card">
+        <div class="artist-panel__art">${createArtworkMarkup(artist, { sizeClass: "artwork--artist-panel" })}</div>
+        <div class="artist-panel__copy">
+          <div class="artist-panel__head">
+            <h1>${escapeHtml(artist.name)}</h1>
+            <div class="meta-row meta-row--tight">
+              <span>${pluralize(artist.releaseCount, "release")}</span>
+              <span>${pluralize(artist.trackCount, "track")}</span>
+            </div>
+          </div>
+          <div class="tag-row">${artist.genres.length ? artist.genres.map(createTag).join("") : ""}</div>
+          <div class="toolbar toolbar--dense">
+            <button type="button" class="button button--primary button--small" data-play-artist-slug="${escapeHtml(artist.slug)}">Play now</button>
+            <a class="button button--ghost button--small" href="${escapeHtml(resolvePlaylistPath("artist", artist.slug))}">Playlist</a>
+            <button type="button" class="button button--ghost button--small" data-share-path="${escapeHtml(resolveArtistPath(artist.slug))}" data-share-title="${escapeHtml(artist.name)}" data-share-text="Artist">Share</button>
           </div>
         </div>
       </section>
 
       <section class="section">
-        ${createSectionHeader("Releases", "Sorted by release date.", null, null)}
+        ${createSectionHeader("Releases", null, null, null)}
         <div class="card-grid card-grid--releases">
           ${releases.map((release) => createReleaseCard(release)).join("")}
         </div>
       </section>
 
       <section class="section">
-        ${createSectionHeader("Artist playlist", "Direct playback across every track in this artist catalog.", null, null)}
+        ${createSectionHeader("Tracks", null, null, null)}
         <div class="track-list card">
           ${tracks.map((track) => createTrackRow(track, { contextType: "artist", contextId: artist.slug })).join("")}
         </div>
@@ -206,7 +214,7 @@ function renderArtist({ library, params }) {
   };
 }
 
-function renderRelease({ library, params, player }) {
+function renderRelease({ library, params }) {
   const artistSlug = params.get("artist");
   const releaseSlug = params.get("release");
   const release = library.getReleaseBySlug(artistSlug, releaseSlug);
@@ -230,39 +238,39 @@ function renderRelease({ library, params, player }) {
 
   return {
     html: `
-      <section class="release-layout">
-        <div class="release-layout__cover card">
-          ${createArtworkMarkup(release, { sizeClass: "artwork--release" })}
+      <section class="release-panel card">
+        <div class="release-panel__art">
+          ${createArtworkMarkup(release, { sizeClass: "artwork--release-panel" })}
         </div>
 
-        <div class="release-layout__content">
-          <span class="eyebrow">Release</span>
-          <h1>${escapeHtml(release.title)}</h1>
-          <p class="lead">
-            <a href="${escapeHtml(resolveArtistPath(release.artistSlug))}">${escapeHtml(release.artist)}</a>
-            ${release.genre ? ` &middot; ${escapeHtml(release.genre)}` : ""}
-          </p>
-
-          <div class="meta-row">
-            <span>${pluralize(tracks.length, "track")}</span>
-            ${release.dateOfCreation ? `<span>Created ${escapeHtml(formatDate(release.dateOfCreation))}</span>` : ""}
-            ${release.dateOfRelease ? `<span>Released ${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
+        <div class="release-panel__copy">
+          <div class="release-panel__head">
+            <h1>${escapeHtml(release.title)}</h1>
+            <p class="lead">
+              <a href="${escapeHtml(resolveArtistPath(release.artistSlug))}">${escapeHtml(release.artist)}</a>
+              ${release.genre ? ` <span>&middot;</span> ${escapeHtml(release.genre)}` : ""}
+            </p>
           </div>
 
-          <div class="hero__actions">
-            <button type="button" class="button button--primary" data-play-release-id="${escapeHtml(release.id)}">Play release</button>
-            <button type="button" class="button button--ghost" data-copy-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">Copy link</button>
-            <button type="button" class="button button--ghost" data-share-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}" data-share-title="${escapeHtml(release.title)}" data-share-text="${escapeHtml(release.artist)}">Share</button>
-            <a class="button button--ghost" href="${escapeHtml(resolveArtistPath(release.artistSlug))}">Open artist</a>
+          <div class="meta-row meta-row--tight">
+            <span>${pluralize(tracks.length, "track")}</span>
+            ${release.dateOfCreation ? `<span>${escapeHtml(formatDate(release.dateOfCreation))}</span>` : ""}
+            ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
+          </div>
+
+          <div class="toolbar toolbar--dense">
+            <button type="button" class="button button--primary button--small" data-play-release-id="${escapeHtml(release.id)}">Play now</button>
+            <button type="button" class="button button--ghost button--small" data-copy-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">Copy link</button>
+            <button type="button" class="button button--ghost button--small" data-share-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}" data-share-title="${escapeHtml(release.title)}" data-share-text="${escapeHtml(release.artist)}">Share</button>
+            <a class="button button--ghost button--small" href="${escapeHtml(resolveArtistPath(release.artistSlug))}">Artist</a>
           </div>
 
           <section class="inline-player card" data-inline-player data-track-id="${escapeHtml(primaryTrack?.id || "")}">
             <div class="inline-player__top">
               <strong>Main player</strong>
-              <span>Sticky playback stays available across the entire site.</span>
             </div>
             <div class="inline-player__controls">
-              <button type="button" class="icon-button icon-button--accent icon-button--xl" data-inline-action="toggle" aria-label="Play or pause">${primaryTrack ? "" : "?"}</button>
+              <button type="button" class="icon-button icon-button--accent" data-inline-action="toggle" aria-label="Play or pause">${primaryTrack ? "" : "?"}</button>
               <button type="button" class="icon-button" data-inline-action="previous" aria-label="Previous track">${iconPrevious()}</button>
               <button type="button" class="icon-button" data-inline-action="next" aria-label="Next track">${iconNext()}</button>
             </div>
@@ -280,7 +288,7 @@ function renderRelease({ library, params, player }) {
       </section>
 
       <section class="section">
-        ${createSectionHeader("Tracklist", "Ready for multi-track releases later without changing the structure.", null, null)}
+        ${createSectionHeader("Tracklist", null, null, null)}
         <div class="track-list card">
           ${tracks.map((track) => createTrackRow(track, { contextType: "release", contextId: release.id })).join("")}
         </div>
@@ -294,7 +302,7 @@ function renderRelease({ library, params, player }) {
 
       currentPlayer.connectInlinePanel(panel);
 
-      panel.addEventListener("click", (event) => {
+      const onClick = (event) => {
         const action = event.target.closest("[data-inline-action]")?.dataset.inlineAction;
         if (!action) {
           return;
@@ -316,25 +324,32 @@ function renderRelease({ library, params, player }) {
         if (action === "next") {
           currentPlayer.next();
         }
-      });
+      };
 
       const seek = panel.querySelector("[data-inline-seek]");
       const volume = panel.querySelector("[data-inline-volume]");
 
-      seek?.addEventListener("input", () => {
+      const onSeek = () => {
         if (!currentPlayer.audio.duration) {
           return;
         }
 
         currentPlayer.audio.currentTime = (Number(seek.value) / 1000) * currentPlayer.audio.duration;
         currentPlayer.syncUI();
-      });
+      };
 
-      volume?.addEventListener("input", () => {
+      const onVolume = () => {
         currentPlayer.setVolume(Number(volume.value) / 100);
-      });
+      };
+
+      panel.addEventListener("click", onClick);
+      seek?.addEventListener("input", onSeek);
+      volume?.addEventListener("input", onVolume);
 
       return () => {
+        panel.removeEventListener("click", onClick);
+        seek?.removeEventListener("input", onSeek);
+        volume?.removeEventListener("input", onVolume);
         currentPlayer.disconnectInlinePanel(panel);
       };
     },
@@ -353,24 +368,25 @@ function renderPlaylists({ library }) {
 
   return {
     html: `
-      <section class="page-header">
+      <section class="page-header page-header--compact">
         <div>
-          <span class="eyebrow">Playlists</span>
-          <h1>Auto-generated listening routes.</h1>
-          <p>Every playlist is derived from the repository itself: global catalog, latest drops, and one playlist per artist.</p>
+          <h1>Playlists</h1>
+          <div class="meta-row meta-row--tight">
+            <span>${pluralize(library.playlists.length, "playlist")}</span>
+          </div>
         </div>
       </section>
 
       <section class="section">
-        ${createSectionHeader("Core playlists", "Start broad, then narrow down by artist.", null, null)}
+        ${createSectionHeader("Core", null, null, null)}
         <div class="playlist-stack">
           ${mainPlaylists.map((playlist) => createPlaylistCard(playlist, library)).join("")}
         </div>
       </section>
 
       <section class="section">
-        ${createSectionHeader("Artist playlists", "One full queue per artist.", null, null)}
-        <div class="card-grid card-grid--artists">
+        ${createSectionHeader("By artist", null, null, null)}
+        <div class="card-grid card-grid--artists-page">
           ${artistPlaylists.map((playlist) => createPlaylistCard(playlist, library)).join("")}
         </div>
       </section>
@@ -399,28 +415,26 @@ function renderPlaylist({ library, params }) {
 
   return {
     html: `
-      <section class="playlist-hero card">
-        <div class="playlist-hero__art">
-          ${createArtworkMarkup({ title: playlist.title, artist: artist?.name || playlist.description, coverPath: playlist.coverPath }, { sizeClass: "artwork--release" })}
+      <section class="playlist-panel card">
+        <div class="playlist-panel__art">
+          ${createArtworkMarkup({ title: playlist.title, artist: artist?.name || playlist.description, coverPath: playlist.coverPath }, { sizeClass: "artwork--playlist-panel" })}
         </div>
-        <div class="playlist-hero__copy">
-          <span class="eyebrow">Playlist</span>
+        <div class="playlist-panel__copy">
           <h1>${escapeHtml(playlist.title)}</h1>
-          <p>${escapeHtml(playlist.description || "Auto-generated playlist.")}</p>
-          <div class="meta-row">
+          <div class="meta-row meta-row--tight">
             <span>${pluralize(tracks.length, "track")}</span>
             ${artist ? `<span>${escapeHtml(artist.name)}</span>` : ""}
           </div>
-          <div class="hero__actions">
-            <button type="button" class="button button--primary" data-play-playlist-id="${escapeHtml(playlist.id)}">Play playlist</button>
-            <button type="button" class="button button--ghost" data-copy-path="${escapeHtml(playlist.href)}">Copy link</button>
-            <button type="button" class="button button--ghost" data-share-path="${escapeHtml(playlist.href)}" data-share-title="${escapeHtml(playlist.title)}" data-share-text="Playlist">Share</button>
+          <div class="toolbar toolbar--dense">
+            <button type="button" class="button button--primary button--small" data-play-playlist-id="${escapeHtml(playlist.id)}">Play now</button>
+            <button type="button" class="button button--ghost button--small" data-copy-path="${escapeHtml(playlist.href)}">Copy link</button>
+            <button type="button" class="button button--ghost button--small" data-share-path="${escapeHtml(playlist.href)}" data-share-title="${escapeHtml(playlist.title)}" data-share-text="Playlist">Share</button>
           </div>
         </div>
       </section>
 
       <section class="section">
-        ${createSectionHeader("Tracks", "Playable without leaving the interface.", null, null)}
+        ${createSectionHeader("Tracks", null, null, null)}
         <div class="track-list card">
           ${tracks.map((track) => createTrackRow(track, { contextType: "playlist", contextId: playlist.id })).join("")}
         </div>
@@ -435,12 +449,11 @@ function renderNotFound({ title, description }) {
   return {
     html: `
       <section class="empty-state card">
-        <span class="eyebrow">Missing content</span>
         <h1>${escapeHtml(title)}</h1>
         <p>${escapeHtml(description)}</p>
-        <div class="hero__actions">
-          <a class="button button--primary" href="index.html">Back home</a>
-          <a class="button button--ghost" href="artists.html">Artists</a>
+        <div class="toolbar toolbar--dense">
+          <a class="button button--primary button--small" href="index.html">Home</a>
+          <a class="button button--ghost button--small" href="artists.html">Artists</a>
         </div>
       </section>
     `,
@@ -452,41 +465,9 @@ function createSectionHeader(title, description, href, label) {
     <div class="section__header">
       <div>
         <h2>${escapeHtml(title)}</h2>
-        <p>${escapeHtml(description)}</p>
+        ${description ? `<p>${escapeHtml(description)}</p>` : ""}
       </div>
       ${href && label ? `<a class="inline-link" href="${escapeHtml(href)}">${escapeHtml(label)}</a>` : ""}
-    </div>
-  `;
-}
-
-function createMetricCard(value, label) {
-  return `
-    <div class="metric-card">
-      <strong>${value}</strong>
-      <span>${escapeHtml(label)}</span>
-    </div>
-  `;
-}
-
-function createReleaseFeature(release) {
-  return `
-    <div class="feature-card">
-      <div class="feature-card__art">
-        ${createArtworkMarkup(release, { sizeClass: "artwork--feature" })}
-      </div>
-      <div class="feature-card__copy">
-        <span class="eyebrow">Latest drop</span>
-        <h2>${escapeHtml(release.title)}</h2>
-        <p>${escapeHtml(release.artist)}${release.genre ? ` &middot; ${escapeHtml(release.genre)}` : ""}</p>
-        <div class="feature-card__meta">
-          ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
-          <span>${pluralize(release.trackIds.length, "track")}</span>
-        </div>
-        <div class="hero__actions">
-          <button type="button" class="button button--primary" data-play-release-id="${escapeHtml(release.id)}">Play release</button>
-          <a class="button button--ghost" href="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">Open page</a>
-        </div>
-      </div>
     </div>
   `;
 }
@@ -498,17 +479,17 @@ function createReleaseCard(release) {
         ${createArtworkMarkup(release, { sizeClass: "artwork--card" })}
       </a>
       <div class="release-card__copy">
-        <div>
+        <div class="release-card__head">
           <h3><a href="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">${escapeHtml(release.title)}</a></h3>
           <p><a href="${escapeHtml(resolveArtistPath(release.artistSlug))}">${escapeHtml(release.artist)}</a></p>
         </div>
-        <div class="meta-row">
+        <div class="meta-row meta-row--tight">
           ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
           ${release.genre ? `<span>${escapeHtml(release.genre)}</span>` : ""}
         </div>
-        <div class="card-actions">
-          <button type="button" class="button button--small button--primary" data-play-release-id="${escapeHtml(release.id)}">Play</button>
-          <button type="button" class="button button--small button--ghost" data-copy-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">Copy link</button>
+        <div class="card-actions card-actions--compact">
+          <button type="button" class="button button--primary button--small" data-play-release-id="${escapeHtml(release.id)}">Play</button>
+          <button type="button" class="button button--ghost button--small" data-copy-path="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">Link</button>
         </div>
       </div>
     </article>
@@ -516,20 +497,20 @@ function createReleaseCard(release) {
 }
 
 function createArtistCard(artist) {
-  const latestReleaseHref = artist.releaseIds[0] ? resolveArtistPath(artist.slug) : resolveArtistPath(artist.slug);
-
   return `
     <article class="card artist-card" data-artist-card data-latest="${escapeHtml(artist.latestReleaseDate || "")}" data-releases="${artist.releaseCount}" data-name="${escapeHtml(artist.name)}">
       <a href="${escapeHtml(resolveArtistPath(artist.slug))}" class="artist-card__art">
-        ${createArtworkMarkup(artist, { sizeClass: "artwork--artist", round: true })}
+        ${createArtworkMarkup(artist, { sizeClass: "artwork--artist-compact" })}
       </a>
       <div class="artist-card__copy">
-        <h3><a href="${escapeHtml(resolveArtistPath(artist.slug))}">${escapeHtml(artist.name)}</a></h3>
-        <p>${pluralize(artist.releaseCount, "release")} &middot; ${pluralize(artist.trackCount, "track")}</p>
-        <div class="tag-row">${artist.genres.slice(0, 3).map(createTag).join("")}</div>
-        <div class="card-actions">
-          <a class="button button--small button--primary" href="${escapeHtml(latestReleaseHref)}">Open artist</a>
-          <button type="button" class="button button--small button--ghost" data-play-artist-slug="${escapeHtml(artist.slug)}">Play playlist</button>
+        <div class="artist-card__head">
+          <h3><a href="${escapeHtml(resolveArtistPath(artist.slug))}">${escapeHtml(artist.name)}</a></h3>
+          <p>${pluralize(artist.releaseCount, "release")}</p>
+        </div>
+        <div class="tag-row">${artist.genres.slice(0, 2).map(createTag).join("")}</div>
+        <div class="card-actions card-actions--compact">
+          <a class="button button--ghost button--small" href="${escapeHtml(resolveArtistPath(artist.slug))}">Open</a>
+          <button type="button" class="button button--primary button--small" data-play-artist-slug="${escapeHtml(artist.slug)}">Play</button>
         </div>
       </div>
     </article>
@@ -538,23 +519,21 @@ function createArtistCard(artist) {
 
 function createPlaylistCard(playlist, library) {
   const tracks = library.getTracksForPlaylist(playlist);
-  const subtitle = playlist.artistSlug ? library.getArtistBySlug(playlist.artistSlug)?.name : playlist.description;
+  const subtitle = playlist.artistSlug ? library.getArtistBySlug(playlist.artistSlug)?.name : playlist.title;
 
   return `
     <article class="card playlist-card">
       <a href="${escapeHtml(playlist.href)}" class="playlist-card__art">
-        ${createArtworkMarkup({ title: playlist.title, artist: subtitle, coverPath: playlist.coverPath }, { sizeClass: "artwork--card" })}
+        ${createArtworkMarkup({ title: playlist.title, artist: subtitle, coverPath: playlist.coverPath }, { sizeClass: "artwork--playlist-compact" })}
       </a>
       <div class="playlist-card__copy">
-        <h3><a href="${escapeHtml(playlist.href)}">${escapeHtml(playlist.title)}</a></h3>
-        <p>${escapeHtml(playlist.description || "")}</p>
-        <div class="meta-row">
-          <span>${pluralize(tracks.length, "track")}</span>
-          ${playlist.artistSlug ? `<span>${escapeHtml(subtitle || "")}</span>` : ""}
+        <div class="playlist-card__head">
+          <h3><a href="${escapeHtml(playlist.href)}">${escapeHtml(playlist.title)}</a></h3>
+          <p>${pluralize(tracks.length, "track")}</p>
         </div>
-        <div class="card-actions">
-          <button type="button" class="button button--small button--primary" data-play-playlist-id="${escapeHtml(playlist.id)}">Play</button>
-          <button type="button" class="button button--small button--ghost" data-share-path="${escapeHtml(playlist.href)}" data-share-title="${escapeHtml(playlist.title)}" data-share-text="Playlist">Share</button>
+        <div class="card-actions card-actions--compact">
+          <button type="button" class="button button--primary button--small" data-play-playlist-id="${escapeHtml(playlist.id)}">Play</button>
+          <button type="button" class="button button--ghost button--small" data-share-path="${escapeHtml(playlist.href)}" data-share-title="${escapeHtml(playlist.title)}" data-share-text="Playlist">Share</button>
         </div>
       </div>
     </article>
@@ -588,15 +567,6 @@ function createTrackRow(track, options = {}) {
 
 function createTag(value) {
   return `<span class="tag">${escapeHtml(value)}</span>`;
-}
-
-function createEmptyCard(title, description) {
-  return `
-    <div class="empty-state empty-state--small">
-      <h2>${escapeHtml(title)}</h2>
-      <p>${escapeHtml(description)}</p>
-    </div>
-  `;
 }
 
 function iconPlay() {

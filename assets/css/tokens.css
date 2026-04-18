@@ -1,26 +1,26 @@
 :root {
-  --bg: #090b11;
-  --bg-elevated: rgba(14, 18, 28, 0.96);
-  --surface: rgba(19, 24, 35, 0.92);
-  --surface-strong: rgba(24, 31, 45, 0.96);
-  --surface-soft: rgba(255, 255, 255, 0.05);
-  --surface-border: rgba(255, 255, 255, 0.08);
-  --surface-border-strong: rgba(124, 247, 212, 0.18);
-  --text: #f4f7fb;
-  --text-muted: #9aa7bb;
-  --text-soft: #c8d3e4;
-  --accent: #7cf7d4;
-  --accent-strong: #31d0ff;
-  --accent-shadow: rgba(49, 208, 255, 0.22);
-  --danger: #ff7878;
-  --radius-sm: 14px;
-  --radius-md: 22px;
-  --radius-lg: 30px;
-  --shadow-soft: 0 22px 56px rgba(0, 0, 0, 0.34);
-  --shadow-card: 0 20px 44px rgba(0, 0, 0, 0.3);
-  --page-width: min(1180px, calc(100vw - 2rem));
-  --header-height: 78px;
-  --player-height: 112px;
+  --bg: #0a0c0f;
+  --bg-elevated: #0f1216;
+  --surface: #14181d;
+  --surface-strong: #1a1f26;
+  --surface-muted: #20262e;
+  --surface-border: #252c35;
+  --surface-border-strong: #33404d;
+  --text: #f3f5f7;
+  --text-soft: #d5dae1;
+  --text-muted: #99a3b0;
+  --accent: #8cc8ff;
+  --accent-strong: #5aa7f7;
+  --accent-soft: rgba(140, 200, 255, 0.12);
+  --danger: #ef7d7d;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.03);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --page-width: min(1240px, calc(100vw - 32px));
+  --header-height: 58px;
+  --player-height: 86px;
   --font-body: "Instrument Sans", "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", "Instrument Sans", sans-serif;
 }
@@ -38,12 +38,11 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: var(--font-body);
+  background: var(--bg);
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(49, 208, 255, 0.14), transparent 32%),
-    radial-gradient(circle at top right, rgba(124, 247, 212, 0.1), transparent 24%),
-    linear-gradient(180deg, #0d111a 0%, #090b11 52%, #07090f 100%);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
 }
 
 img {
@@ -67,6 +66,6 @@ a {
 }
 
 svg {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
 }

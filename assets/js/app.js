@@ -56,7 +56,7 @@ function renderShell() {
           <span class="brand__mark">FK</span>
           <span class="brand__copy">
             <strong>FK Soundcloud</strong>
-            <small>Static personal streaming</small>
+            <small>Library</small>
           </span>
         </a>
 
@@ -75,15 +75,14 @@ function renderShell() {
         <div class="search-panel__inner card">
           <div class="search-panel__header">
             <div>
-              <span class="eyebrow">Quick Search</span>
-              <h2>Track, artist, genre, release</h2>
+              <h2>Search</h2>
             </div>
             <button type="button" class="icon-button" data-close-search aria-label="Close search">
               <span>&times;</span>
             </button>
           </div>
           <label class="search-input">
-            <input type="search" placeholder="Search by title, artist or genre..." data-search-input>
+            <input type="search" placeholder="Track, artist, genre, release..." data-search-input>
           </label>
           <div class="search-results" data-search-results></div>
         </div>
@@ -415,7 +414,7 @@ function renderSearchResults(results) {
   ];
 
   if (!results.artists.length && !results.releases.length && !results.tracks.length) {
-    return `<p class="search-empty">No result yet. Try another title, artist or genre.</p>`;
+    return `<p class="search-empty">No results.</p>`;
   }
 
   return sections.join("");
