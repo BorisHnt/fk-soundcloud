@@ -1,0 +1,10 @@
+{
+  "name": "fk-soundcloud",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static personal music platform generated from the musics/ folder.",
+  "scripts": {
+    "generate:library": "node scripts/generate-library.js",
+    "preview": "node scripts/serve.js"
+  }
+}

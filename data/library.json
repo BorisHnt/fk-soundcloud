@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-04-18T18:43:04.505Z",
+  "source": "scripts/generate-library.js",
+  "stats": {
+    "artistCount": 1,
+    "releaseCount": 1,
+    "trackCount": 1,
+    "playlistCount": 3
+  },
+  "artists": [
+    {
+      "id": "artist:megasuka",
+      "name": "MEGASUKA",
+      "slug": "megasuka",
+      "path": "musics/MEGASUKA",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "genres": [
+        "Hard Techno"
+      ],
+      "releaseIds": [
+        "release:megasuka:blackpink-jump-megasuka-rmx"
+      ],
+      "trackIds": [
+        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+      ],
+      "releaseCount": 1,
+      "trackCount": 1,
+      "latestReleaseDate": "2026-04-18",
+      "href": "artist.html?slug=megasuka",
+      "playlistHref": "playlist.html?type=artist&slug=megasuka"
+    }
+  ],
+  "releases": [
+    {
+      "id": "release:megasuka:blackpink-jump-megasuka-rmx",
+      "slug": "blackpink-jump-megasuka-rmx",
+      "title": "BLACKPINK - JUMP [MEGASUKA RMX]",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "dateOfCreation": "2026-03-28",
+      "dateOfRelease": "2026-04-18",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "infoPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/infos.txt",
+      "path": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]",
+      "sortDate": "2026-04-18",
+      "trackIds": [
+        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+      ],
+      "primaryTrackId": "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx",
+      "href": "release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx",
+      "slug": "blackpink-jump-megasuka-rmx",
+      "title": "BLACKPINK - JUMP [MEGASUKA RMX]",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "releaseId": "release:megasuka:blackpink-jump-megasuka-rmx",
+      "releaseSlug": "blackpink-jump-megasuka-rmx",
+      "releaseTitle": "BLACKPINK - JUMP [MEGASUKA RMX]",
+      "audioPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/BLACKPINK_-_JUMP_[MEGASUKA_RMX].mp3",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "dateOfCreation": "2026-03-28",
+      "dateOfRelease": "2026-04-18",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "sortDate": "2026-04-18",
+      "duration": null,
+      "trackNumber": 1,
+      "href": "release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx",
+      "shareUrl": "/release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx"
+    }
+  ],
+  "playlists": [
+    {
+      "id": "playlist:all-tracks",
+      "type": "all-tracks",
+      "title": "All Tracks",
+      "slug": "all-tracks",
+      "description": "Complete library across every artist and release.",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "trackIds": [
+        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+      ],
+      "href": "playlist.html?type=all",
+      "shareUrl": "/playlist.html?type=all"
+    },
+    {
+      "id": "playlist:latest-releases",
+      "type": "latest-releases",
+      "title": "Latest Releases",
+      "slug": "latest-releases",
+      "description": "Newest tracks ordered by release date.",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "trackIds": [
+        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+      ],
+      "href": "playlist.html?type=latest",
+      "shareUrl": "/playlist.html?type=latest"
+    },
+    {
+      "id": "playlist:artist:megasuka",
+      "type": "artist",
+      "title": "MEGASUKA",
+      "slug": "megasuka",
+      "artistSlug": "megasuka",
+      "description": "Full playlist for MEGASUKA.",
+      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "trackIds": [
+        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+      ],
+      "href": "playlist.html?type=artist&slug=megasuka",
+      "shareUrl": "/playlist.html?type=artist&slug=megasuka"
+    }
+  ],
+  "warnings": []
+}
