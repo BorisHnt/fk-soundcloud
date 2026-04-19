@@ -477,6 +477,16 @@ function createSectionHeader(title, description, href, label) {
 }
 
 function createReleaseCard(release) {
+  const primaryMetaParts = [
+    release.releaseType ? escapeHtml(release.releaseType) : "",
+    release.trackCount ? escapeHtml(pluralize(release.trackCount, "track")) : "",
+  ].filter(Boolean);
+  const primaryMeta = release.duration
+    ? `${primaryMetaParts.join(" ")}${primaryMetaParts.length ? " - " : ""}${escapeHtml(formatTime(release.duration))}`
+    : primaryMetaParts.join(" ");
+  const secondaryMeta = release.dateOfRelease ? escapeHtml(formatDate(release.dateOfRelease)) : "";
+  const tertiaryMeta = release.genre ? escapeHtml(release.genre) : "";
+
   return `
     <article class="card release-card">
       <a class="release-card__cover" href="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">
@@ -487,12 +497,10 @@ function createReleaseCard(release) {
           <h3><a href="${escapeHtml(resolveReleasePath(release.artistSlug, release.slug))}">${escapeHtml(release.title)}</a></h3>
           <p><a href="${escapeHtml(resolveArtistPath(release.artistSlug))}">${escapeHtml(release.artist)}</a></p>
         </div>
-        <div class="meta-row meta-row--tight">
-          ${release.releaseType ? `<span>${escapeHtml(release.releaseType)}</span>` : ""}
-          ${release.trackCount ? `<span>${pluralize(release.trackCount, "track")}</span>` : ""}
-          ${release.duration ? `<span>${escapeHtml(formatTime(release.duration))}</span>` : ""}
-          ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
-          ${release.genre ? `<span>${escapeHtml(release.genre)}</span>` : ""}
+        <div class="release-card__meta">
+          ${primaryMeta ? `<span>${primaryMeta}</span>` : ""}
+          ${secondaryMeta ? `<span>${secondaryMeta}</span>` : ""}
+          ${tertiaryMeta ? `<span>${tertiaryMeta}</span>` : ""}
         </div>
         <div class="card-actions card-actions--compact">
           <button type="button" class="button button--primary button--small" data-play-release-id="${escapeHtml(release.id)}">Play</button>

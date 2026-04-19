@@ -276,6 +276,10 @@ h3 {
   gap: 2px;
 }
 
+.release-card__head {
+  min-width: 0;
+}
+
 .release-card h3,
 .artist-card h3,
 .playlist-card h3 {
@@ -294,8 +298,30 @@ h3 {
   font-size: 0.86rem;
 }
 
-.release-card .meta-row {
-  font-size: 0.78rem;
+.release-card h3,
+.release-card h3 a {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.release-card__meta {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  color: var(--text-muted);
+  font-size: 0.73rem;
+  line-height: 1.18;
+}
+
+.release-card__meta span {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .release-card,
