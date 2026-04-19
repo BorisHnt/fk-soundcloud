@@ -1,0 +1,11 @@
+date_of_creation:2022-05-25
+date_of_release:2023-03-10
+genre:Frenchcore
+artist:КОШМАР
+remix:no
+ogartist:КОШМАР
+ep-lp:CURSED GIFT EP
+title:CURSED GIFT
+nberofthetrack:1
+duration:00:05:38
+fullname:КОШМАР - CURSED GIFT

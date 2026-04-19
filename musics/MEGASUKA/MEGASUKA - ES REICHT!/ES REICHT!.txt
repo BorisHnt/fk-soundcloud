@@ -4,7 +4,7 @@ genre:Hard Techno
 artist:MEGASUKA
 remix:no
 ogartist:MEGASUKA
-ep-lp:SES ES REICHT! EP
+ep-lp:ES REICHT! EP
 title:ES REICHT!
 nberofthetrack:1
 duration:00:03:32

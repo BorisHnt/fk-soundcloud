@@ -12,13 +12,53 @@ const AUDIO_EXTENSIONS = new Set([".mp3", ".wav", ".ogg", ".m4a", ".flac", ".aac
 const COVER_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".avif"]);
 const TEXT_EXTENSIONS = new Set([".txt"]);
 const RELEASE_INFO_PRIORITY = ["release.txt", "ep.txt", "album.txt", "lp.txt", "infos.txt"];
+const CYRILLIC_TO_LATIN = {
+  а: "a",
+  б: "b",
+  в: "v",
+  г: "g",
+  д: "d",
+  е: "e",
+  ё: "e",
+  ж: "j",
+  з: "z",
+  и: "i",
+  й: "i",
+  к: "k",
+  л: "l",
+  м: "m",
+  н: "n",
+  о: "o",
+  п: "p",
+  р: "r",
+  с: "s",
+  т: "t",
+  у: "u",
+  ф: "f",
+  х: "kh",
+  ц: "ts",
+  ч: "tch",
+  ш: "ch",
+  щ: "shch",
+  ы: "y",
+  э: "e",
+  ю: "you",
+  я: "ya",
+  ь: "",
+  ъ: "",
+};
+
+function transliterateToLatin(value) {
+  return [...String(value || "")]
+    .map((character) => CYRILLIC_TO_LATIN[character] ?? character)
+    .join("");
+}
 
 function slugify(value) {
-  return String(value || "")
+  return transliterateToLatin(String(value || "").toLowerCase())
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
     .replace(/^-+|-+$/g, "") || "item";
 }
 

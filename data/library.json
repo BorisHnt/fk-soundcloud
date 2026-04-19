@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-04-19T07:01:13.961Z",
+  "generatedAt": "2026-04-19T19:12:02.503Z",
   "source": "scripts/generate-library.js",
   "stats": {
-    "artistCount": 1,
-    "releaseCount": 3,
-    "trackCount": 3,
-    "playlistCount": 3
+    "artistCount": 2,
+    "releaseCount": 4,
+    "trackCount": 4,
+    "playlistCount": 4
   },
   "artists": [
     {
@@ -32,6 +32,27 @@
       "latestReleaseDate": "2026-04-18",
       "href": "artist.html?slug=megasuka",
       "playlistHref": "playlist.html?type=artist&slug=megasuka"
+    },
+    {
+      "id": "artist:kochmar",
+      "name": "КОШМАР",
+      "slug": "kochmar",
+      "path": "musics/КОШМАР",
+      "coverPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.png",
+      "genres": [
+        "Frenchcore"
+      ],
+      "releaseIds": [
+        "release:kochmar:kochmar-cursed-gift"
+      ],
+      "trackIds": [
+        "track:kochmar:kochmar-cursed-gift:01-cursed-gift"
+      ],
+      "releaseCount": 1,
+      "trackCount": 1,
+      "latestReleaseDate": "2023-03-10",
+      "href": "artist.html?slug=kochmar",
+      "playlistHref": "playlist.html?type=artist&slug=kochmar"
     }
   ],
   "releases": [
@@ -94,7 +115,7 @@
     {
       "id": "release:megasuka:megasuka-es-reicht",
       "slug": "megasuka-es-reicht",
-      "title": "SES ES REICHT! EP",
+      "title": "ES REICHT! EP",
       "artist": "MEGASUKA",
       "artistSlug": "megasuka",
       "artistId": "artist:megasuka",
@@ -117,6 +138,33 @@
       ],
       "primaryTrackId": "track:megasuka:megasuka-es-reicht:01-es-reicht",
       "href": "release.html?artist=megasuka&release=megasuka-es-reicht"
+    },
+    {
+      "id": "release:kochmar:kochmar-cursed-gift",
+      "slug": "kochmar-cursed-gift",
+      "title": "CURSED GIFT EP",
+      "artist": "КОШМАР",
+      "artistSlug": "kochmar",
+      "artistId": "artist:kochmar",
+      "coverPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.png",
+      "dateOfCreation": "2022-05-25",
+      "dateOfRelease": "2023-03-10",
+      "genre": "Frenchcore",
+      "genres": [
+        "Frenchcore"
+      ],
+      "releaseType": "EP",
+      "trackCount": 1,
+      "duration": 338,
+      "originalArtists": [],
+      "infoPath": null,
+      "path": "musics/КОШМАР/КОШМАР - CURSED GIFT",
+      "sortDate": "2023-03-10",
+      "trackIds": [
+        "track:kochmar:kochmar-cursed-gift:01-cursed-gift"
+      ],
+      "primaryTrackId": "track:kochmar:kochmar-cursed-gift:01-cursed-gift",
+      "href": "release.html?artist=kochmar&release=kochmar-cursed-gift"
     }
   ],
   "tracks": [
@@ -190,7 +238,7 @@
       "isRemix": false,
       "releaseId": "release:megasuka:megasuka-es-reicht",
       "releaseSlug": "megasuka-es-reicht",
-      "releaseTitle": "SES ES REICHT! EP",
+      "releaseTitle": "ES REICHT! EP",
       "releaseType": "EP",
       "audioPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.mp3",
       "coverPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.png",
@@ -206,6 +254,35 @@
       "trackNumber": 1,
       "href": "release.html?artist=megasuka&release=megasuka-es-reicht",
       "shareUrl": "/release.html?artist=megasuka&release=megasuka-es-reicht"
+    },
+    {
+      "id": "track:kochmar:kochmar-cursed-gift:01-cursed-gift",
+      "slug": "cursed-gift",
+      "title": "CURSED GIFT",
+      "fullTitle": "КОШМАР - CURSED GIFT",
+      "artist": "КОШМАР",
+      "artistSlug": "kochmar",
+      "artistId": "artist:kochmar",
+      "originalArtist": null,
+      "isRemix": false,
+      "releaseId": "release:kochmar:kochmar-cursed-gift",
+      "releaseSlug": "kochmar-cursed-gift",
+      "releaseTitle": "CURSED GIFT EP",
+      "releaseType": "EP",
+      "audioPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.mp3",
+      "coverPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.png",
+      "infoPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.txt",
+      "dateOfCreation": "2022-05-25",
+      "dateOfRelease": "2023-03-10",
+      "genre": "Frenchcore",
+      "genres": [
+        "Frenchcore"
+      ],
+      "sortDate": "2023-03-10",
+      "duration": 338,
+      "trackNumber": 1,
+      "href": "release.html?artist=kochmar&release=kochmar-cursed-gift",
+      "shareUrl": "/release.html?artist=kochmar&release=kochmar-cursed-gift"
     }
   ],
   "playlists": [
@@ -219,9 +296,10 @@
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
         "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
-        "track:megasuka:megasuka-es-reicht:01-es-reicht"
+        "track:megasuka:megasuka-es-reicht:01-es-reicht",
+        "track:kochmar:kochmar-cursed-gift:01-cursed-gift"
       ],
-      "duration": 745,
+      "duration": 1083,
       "href": "playlist.html?type=all",
       "shareUrl": "/playlist.html?type=all"
     },
@@ -235,9 +313,10 @@
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
         "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
-        "track:megasuka:megasuka-es-reicht:01-es-reicht"
+        "track:megasuka:megasuka-es-reicht:01-es-reicht",
+        "track:kochmar:kochmar-cursed-gift:01-cursed-gift"
       ],
-      "duration": 745,
+      "duration": 1083,
       "href": "playlist.html?type=latest",
       "shareUrl": "/playlist.html?type=latest"
     },
@@ -257,6 +336,21 @@
       "duration": 745,
       "href": "playlist.html?type=artist&slug=megasuka",
       "shareUrl": "/playlist.html?type=artist&slug=megasuka"
+    },
+    {
+      "id": "playlist:artist:kochmar",
+      "type": "artist",
+      "title": "КОШМАР",
+      "slug": "kochmar",
+      "artistSlug": "kochmar",
+      "description": "Full playlist for КОШМАР.",
+      "coverPath": "musics/КОШМАР/КОШМАР - CURSED GIFT/CURSED GIFT.png",
+      "trackIds": [
+        "track:kochmar:kochmar-cursed-gift:01-cursed-gift"
+      ],
+      "duration": 338,
+      "href": "playlist.html?type=artist&slug=kochmar",
+      "shareUrl": "/playlist.html?type=artist&slug=kochmar"
     }
   ],
   "warnings": []
