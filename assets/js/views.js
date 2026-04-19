@@ -63,9 +63,7 @@ function renderHome({ library }) {
         <div class="home-grid__main">
           <section class="section section--flush">
             ${createSectionHeader("Latest releases", null, "artists.html", "Artists")}
-            <div class="${escapeHtml(getReleaseGridClassName(latestReleases))}">
-              ${latestReleases.map((release) => createReleaseCard(release)).join("")}
-            </div>
+            ${createReleaseCollection(latestReleases)}
           </section>
 
           <section class="section section--flush">
@@ -93,6 +91,9 @@ function renderHome({ library }) {
         </aside>
       </section>
     `,
+    mount({ root }) {
+      return setupReleaseRails(root);
+    },
   };
 }
 
@@ -199,9 +200,7 @@ function renderArtist({ library, params }) {
 
       <section class="section">
         ${createSectionHeader("Releases", null, null, null)}
-        <div class="${escapeHtml(getReleaseGridClassName(releases))}">
-          ${releases.map((release) => createReleaseCard(release)).join("")}
-        </div>
+        ${createReleaseCollection(releases)}
       </section>
 
       <section class="section">
@@ -211,6 +210,9 @@ function renderArtist({ library, params }) {
         </div>
       </section>
     `,
+    mount({ root }) {
+      return setupReleaseRails(root);
+    },
   };
 }
 
@@ -480,6 +482,107 @@ function getReleaseGridClassName(releases) {
   return `card-grid card-grid--releases${(releases?.length || 0) > 3 ? " card-grid--release-rail" : ""}`;
 }
 
+function createReleaseCollection(releases) {
+  const cards = releases.map((release) => createReleaseCard(release)).join("");
+  const gridClassName = escapeHtml(getReleaseGridClassName(releases));
+
+  if ((releases?.length || 0) <= 3) {
+    return `<div class="${gridClassName}">${cards}</div>`;
+  }
+
+  return `
+    <div class="release-rail" data-release-rail>
+      <div class="release-rail__nav-wrap release-rail__nav-wrap--prev" data-release-rail-nav="prev">
+        <button type="button" class="release-rail__nav" data-release-rail-prev aria-label="Scroll releases left">
+          ${iconArrowLeft()}
+        </button>
+      </div>
+      <div class="${gridClassName}" data-release-rail-track>
+        ${cards}
+      </div>
+      <div class="release-rail__nav-wrap release-rail__nav-wrap--next" data-release-rail-nav="next">
+        <button type="button" class="release-rail__nav" data-release-rail-next aria-label="Scroll releases right">
+          ${iconArrowRight()}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function setupReleaseRails(root) {
+  const rails = [...root.querySelectorAll("[data-release-rail]")];
+  const cleanups = [];
+
+  for (const rail of rails) {
+    const track = rail.querySelector("[data-release-rail-track]");
+    const prevButton = rail.querySelector("[data-release-rail-prev]");
+    const nextButton = rail.querySelector("[data-release-rail-next]");
+
+    if (!track || !prevButton || !nextButton) {
+      continue;
+    }
+
+    const syncState = () => {
+      const maxScrollLeft = Math.max(0, track.scrollWidth - track.clientWidth);
+      const canScroll = maxScrollLeft > 6;
+      const hasPrev = canScroll && track.scrollLeft > 6;
+      const hasNext = canScroll && track.scrollLeft < maxScrollLeft - 6;
+
+      rail.classList.toggle("is-scrollable", canScroll);
+      rail.classList.toggle("has-prev", hasPrev);
+      rail.classList.toggle("has-next", hasNext);
+    };
+
+    const scrollByCard = (direction) => {
+      const firstCard = track.querySelector(".release-card");
+      const gap = Number.parseFloat(window.getComputedStyle(track).gap || "0") || 0;
+      const cardWidth = firstCard?.getBoundingClientRect().width || track.clientWidth * 0.86;
+      const delta = (cardWidth + gap) * direction;
+
+      track.scrollBy({
+        left: delta,
+        behavior: "smooth",
+      });
+    };
+
+    const handlePrev = () => scrollByCard(-1);
+    const handleNext = () => scrollByCard(1);
+    const handleScroll = () => syncState();
+
+    prevButton.addEventListener("click", handlePrev);
+    nextButton.addEventListener("click", handleNext);
+    track.addEventListener("scroll", handleScroll, { passive: true });
+
+    let resizeObserver = null;
+    if (typeof ResizeObserver === "function") {
+      resizeObserver = new ResizeObserver(() => syncState());
+      resizeObserver.observe(track);
+    } else {
+      window.addEventListener("resize", syncState);
+    }
+
+    syncState();
+
+    cleanups.push(() => {
+      prevButton.removeEventListener("click", handlePrev);
+      nextButton.removeEventListener("click", handleNext);
+      track.removeEventListener("scroll", handleScroll);
+
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      } else {
+        window.removeEventListener("resize", syncState);
+      }
+    });
+  }
+
+  return () => {
+    for (const cleanup of cleanups) {
+      cleanup();
+    }
+  };
+}
+
 function createReleaseCard(release) {
   const primaryMetaParts = [
     release.releaseType ? escapeHtml(release.releaseType) : "",
@@ -609,5 +712,17 @@ function iconPrevious() {
 function iconNext() {
   return createControlIcon(
     `<path d="M17 5V19M7 7.329V16.671C7 17.7367 7 18.2695 7.21846 18.5432C7.40845 18.7812 7.69654 18.9197 8.00108 18.9194C8.35125 18.919 8.76734 18.5861 9.59951 17.9204L13.8765 14.4988C14.9442 13.6446 15.4781 13.2176 15.6713 12.7016C15.8408 12.2492 15.8408 11.7508 15.6713 11.2984C15.4781 10.7824 14.9442 10.3554 13.8765 9.50122L9.59951 6.07961C8.76734 5.41387 8.35125 5.081 8.00108 5.08063C7.69654 5.0803 7.40845 5.21876 7.21846 5.45677C7 5.73045 7 6.2633 7 7.329Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+  );
+}
+
+function iconArrowLeft() {
+  return createControlIcon(
+    `<path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+  );
+}
+
+function iconArrowRight() {
+  return createControlIcon(
+    `<path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
   );
 }

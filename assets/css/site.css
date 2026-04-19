@@ -245,6 +245,11 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.release-rail {
+  position: relative;
+  min-width: 0;
+}
+
 .card-grid--release-rail {
   display: flex;
   flex-wrap: nowrap;
@@ -278,6 +283,80 @@ h3 {
 .card-grid--release-rail::-webkit-scrollbar-thumb {
   background: var(--surface-border-strong);
   border-radius: 999px;
+}
+
+.release-rail__nav-wrap {
+  position: absolute;
+  top: 0;
+  bottom: 14px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  width: 54px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.release-rail__nav-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.release-rail__nav-wrap--prev {
+  left: 0;
+  justify-content: flex-start;
+}
+
+.release-rail__nav-wrap--prev::before {
+  background: linear-gradient(90deg, rgba(10, 12, 15, 0.92) 0%, rgba(10, 12, 15, 0.72) 52%, rgba(10, 12, 15, 0) 100%);
+}
+
+.release-rail__nav-wrap--next {
+  right: 0;
+  justify-content: flex-end;
+}
+
+.release-rail__nav-wrap--next::before {
+  background: linear-gradient(270deg, rgba(10, 12, 15, 0.92) 0%, rgba(10, 12, 15, 0.72) 52%, rgba(10, 12, 15, 0) 100%);
+}
+
+.release-rail.is-scrollable.has-prev .release-rail__nav-wrap--prev,
+.release-rail.is-scrollable.has-next .release-rail__nav-wrap--next {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.release-rail__nav {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 6px;
+  background: rgba(20, 24, 29, 0.9);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.release-rail__nav:hover {
+  background: var(--surface-strong);
+  transform: translateY(-1px);
+}
+
+.release-rail__nav svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
 }
 
 .card-grid--artists-page {
