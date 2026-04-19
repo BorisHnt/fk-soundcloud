@@ -1,0 +1,11 @@
+date_of_creation:2024-12-09
+date_of_release:2025-03-14
+genre:Hard Techno
+artist:MEGASUKA
+remix:no
+ogartist:MEGASUKA
+ep-lp:SES ES REICHT! EP
+title:ES REICHT!
+nberofthetrack:1
+duration:00:03:32
+fullname:MEGASUKA - ES REICHT!

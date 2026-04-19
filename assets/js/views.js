@@ -255,6 +255,7 @@ function renderRelease({ library, params }) {
           <div class="meta-row meta-row--tight">
             ${release.releaseType ? `<span>${escapeHtml(release.releaseType)}</span>` : ""}
             <span>${pluralize(tracks.length, "track")}</span>
+            ${release.duration ? `<span>${escapeHtml(formatTime(release.duration))}</span>` : ""}
             ${release.originalArtists?.length ? `<span>orig. ${escapeHtml(release.originalArtists.join(", "))}</span>` : ""}
             ${release.dateOfCreation ? `<span>${escapeHtml(formatDate(release.dateOfCreation))}</span>` : ""}
             ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
@@ -425,6 +426,7 @@ function renderPlaylist({ library, params }) {
           <h1>${escapeHtml(playlist.title)}</h1>
           <div class="meta-row meta-row--tight">
             <span>${pluralize(tracks.length, "track")}</span>
+            ${playlist.duration ? `<span>${escapeHtml(formatTime(playlist.duration))}</span>` : ""}
             ${artist ? `<span>${escapeHtml(artist.name)}</span>` : ""}
           </div>
           <div class="toolbar toolbar--dense">
@@ -488,6 +490,7 @@ function createReleaseCard(release) {
         <div class="meta-row meta-row--tight">
           ${release.releaseType ? `<span>${escapeHtml(release.releaseType)}</span>` : ""}
           ${release.trackCount ? `<span>${pluralize(release.trackCount, "track")}</span>` : ""}
+          ${release.duration ? `<span>${escapeHtml(formatTime(release.duration))}</span>` : ""}
           ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
           ${release.genre ? `<span>${escapeHtml(release.genre)}</span>` : ""}
         </div>
@@ -537,6 +540,7 @@ function createPlaylistCard(playlist, library) {
         </div>
         <div class="card-actions card-actions--compact">
           <button type="button" class="button button--primary button--small" data-play-playlist-id="${escapeHtml(playlist.id)}">Play</button>
+          ${playlist.duration ? `<span class="meta-pill">${escapeHtml(formatTime(playlist.duration))}</span>` : ""}
           <button type="button" class="button button--ghost button--small" data-share-path="${escapeHtml(playlist.href)}" data-share-title="${escapeHtml(playlist.title)}" data-share-text="Playlist">Share</button>
         </div>
       </div>

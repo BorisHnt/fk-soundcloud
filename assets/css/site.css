@@ -388,6 +388,18 @@ h3 {
   background: var(--bg-elevated);
 }
 
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  min-height: 32px;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  font-size: 0.8rem;
+}
+
 .artist-panel,
 .release-panel,
 .playlist-panel {

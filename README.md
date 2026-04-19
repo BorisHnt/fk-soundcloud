@@ -45,6 +45,7 @@ ogartist:BLACKPINK
 ep-lp:JUMP [MEGASUKA RMX] EP
 title:JUMP [MEGASUKA RMX]
 nberofthetrack:1
+duration:00:05:16
 fullname:BLACKPINK - JUMP [MEGASUKA RMX]
 ```
 
@@ -53,6 +54,7 @@ Regles actuelles:
 - un `.txt` par track, avec le meme nom de base que le fichier audio
 - un `.txt` de release/EP optionnel si besoin de metadata communes
 - `nberofthetrack` sert a ordonner les pistes dans la release
+- `duration` peut etre fournie au format `HH:MM:SS` ou `MM:SS`
 - plusieurs fichiers audio dans un meme dossier sont supportes
 - l'ancien format `infos.txt` reste lu comme fallback
 

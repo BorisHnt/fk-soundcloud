@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-19T06:49:53.411Z",
+  "generatedAt": "2026-04-19T07:01:13.961Z",
   "source": "scripts/generate-library.js",
   "stats": {
     "artistCount": 1,
-    "releaseCount": 2,
-    "trackCount": 2,
+    "releaseCount": 3,
+    "trackCount": 3,
     "playlistCount": 3
   },
   "artists": [
@@ -19,14 +19,16 @@
       ],
       "releaseIds": [
         "release:megasuka:blackpink-jump-megasuka-rmx",
-        "release:megasuka:megasuka-ses-le-sheitane"
+        "release:megasuka:megasuka-ses-le-sheitane",
+        "release:megasuka:megasuka-es-reicht"
       ],
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
-        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+        "track:megasuka:megasuka-es-reicht:01-es-reicht"
       ],
-      "releaseCount": 2,
-      "trackCount": 2,
+      "releaseCount": 3,
+      "trackCount": 3,
       "latestReleaseDate": "2026-04-18",
       "href": "artist.html?slug=megasuka",
       "playlistHref": "playlist.html?type=artist&slug=megasuka"
@@ -49,6 +51,7 @@
       ],
       "releaseType": "EP",
       "trackCount": 1,
+      "duration": 316,
       "originalArtists": [
         "BLACKPINK"
       ],
@@ -77,6 +80,7 @@
       ],
       "releaseType": "EP",
       "trackCount": 1,
+      "duration": 217,
       "originalArtists": [],
       "infoPath": null,
       "path": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE",
@@ -86,6 +90,33 @@
       ],
       "primaryTrackId": "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
       "href": "release.html?artist=megasuka&release=megasuka-ses-le-sheitane"
+    },
+    {
+      "id": "release:megasuka:megasuka-es-reicht",
+      "slug": "megasuka-es-reicht",
+      "title": "SES ES REICHT! EP",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "coverPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.png",
+      "dateOfCreation": "2024-12-09",
+      "dateOfRelease": "2025-03-14",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "releaseType": "EP",
+      "trackCount": 1,
+      "duration": 212,
+      "originalArtists": [],
+      "infoPath": null,
+      "path": "musics/MEGASUKA/MEGASUKA - ES REICHT!",
+      "sortDate": "2025-03-14",
+      "trackIds": [
+        "track:megasuka:megasuka-es-reicht:01-es-reicht"
+      ],
+      "primaryTrackId": "track:megasuka:megasuka-es-reicht:01-es-reicht",
+      "href": "release.html?artist=megasuka&release=megasuka-es-reicht"
     }
   ],
   "tracks": [
@@ -113,7 +144,7 @@
         "Hard Techno"
       ],
       "sortDate": "2026-04-18",
-      "duration": null,
+      "duration": 316,
       "trackNumber": 1,
       "href": "release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx",
       "shareUrl": "/release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx"
@@ -142,10 +173,39 @@
         "Hard Techno"
       ],
       "sortDate": "2025-09-15",
-      "duration": null,
+      "duration": 217,
       "trackNumber": 1,
       "href": "release.html?artist=megasuka&release=megasuka-ses-le-sheitane",
       "shareUrl": "/release.html?artist=megasuka&release=megasuka-ses-le-sheitane"
+    },
+    {
+      "id": "track:megasuka:megasuka-es-reicht:01-es-reicht",
+      "slug": "es-reicht",
+      "title": "ES REICHT!",
+      "fullTitle": "MEGASUKA - ES REICHT!",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "originalArtist": null,
+      "isRemix": false,
+      "releaseId": "release:megasuka:megasuka-es-reicht",
+      "releaseSlug": "megasuka-es-reicht",
+      "releaseTitle": "SES ES REICHT! EP",
+      "releaseType": "EP",
+      "audioPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.mp3",
+      "coverPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.png",
+      "infoPath": "musics/MEGASUKA/MEGASUKA - ES REICHT!/ES REICHT!.txt",
+      "dateOfCreation": "2024-12-09",
+      "dateOfRelease": "2025-03-14",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "sortDate": "2025-03-14",
+      "duration": 212,
+      "trackNumber": 1,
+      "href": "release.html?artist=megasuka&release=megasuka-es-reicht",
+      "shareUrl": "/release.html?artist=megasuka&release=megasuka-es-reicht"
     }
   ],
   "playlists": [
@@ -158,8 +218,10 @@
       "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
-        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+        "track:megasuka:megasuka-es-reicht:01-es-reicht"
       ],
+      "duration": 745,
       "href": "playlist.html?type=all",
       "shareUrl": "/playlist.html?type=all"
     },
@@ -172,8 +234,10 @@
       "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
-        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+        "track:megasuka:megasuka-es-reicht:01-es-reicht"
       ],
+      "duration": 745,
       "href": "playlist.html?type=latest",
       "shareUrl": "/playlist.html?type=latest"
     },
@@ -187,8 +251,10 @@
       "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
         "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
-        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+        "track:megasuka:megasuka-es-reicht:01-es-reicht"
       ],
+      "duration": 745,
       "href": "playlist.html?type=artist&slug=megasuka",
       "shareUrl": "/playlist.html?type=artist&slug=megasuka"
     }

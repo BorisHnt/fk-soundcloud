@@ -597,7 +597,8 @@ export class AudioPlayer {
     const track = this.currentTrack;
     const trackId = panel.dataset.trackId;
     const isCurrent = track?.id === trackId;
-    const progress = isCurrent && this.audio.duration ? this.audio.currentTime / this.audio.duration : 0;
+    const effectiveDuration = (isCurrent && this.audio.duration) || (isCurrent && track?.duration) || 0;
+    const progress = isCurrent && effectiveDuration ? this.audio.currentTime / effectiveDuration : 0;
 
     const toggle = panel.querySelector("[data-inline-action='toggle']");
     const seek = panel.querySelector("[data-inline-seek]");
@@ -618,7 +619,7 @@ export class AudioPlayer {
     }
 
     if (duration) {
-      duration.textContent = isCurrent ? formatTime(this.audio.duration) : "0:00";
+      duration.textContent = isCurrent ? formatTime(this.audio.duration || track?.duration || 0) : "0:00";
     }
 
     if (volume) {
@@ -631,7 +632,7 @@ export class AudioPlayer {
   syncUI() {
     const track = this.currentTrack;
     const isPlaying = Boolean(track && !this.audio.paused);
-    const duration = this.audio.duration || 0;
+    const duration = this.audio.duration || track?.duration || 0;
     const currentTime = this.audio.currentTime || 0;
     const progress = duration ? Math.round((currentTime / duration) * 1000) : 0;
     const trackMarkupKey = `${track?.id || ""}::${isPlaying}`;

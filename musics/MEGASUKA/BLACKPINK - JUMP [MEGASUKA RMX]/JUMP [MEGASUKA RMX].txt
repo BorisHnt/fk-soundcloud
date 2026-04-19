@@ -7,4 +7,5 @@ ogartist:BLACKPINK
 ep-lp:JUMP [MEGASUKA RMX] EP
 title:JUMP [MEGASUKA RMX]
 nberofthetrack:1
+duration:00:05:16
 fullname:BLACKPINK - JUMP [MEGASUKA RMX]

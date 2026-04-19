@@ -7,4 +7,5 @@ ogartist:MEGASUKA
 ep-lp:SES LE SHEITANE EP
 title:SES LE SHEITANE
 nberofthetrack:1
+duration:00:03:37
 fullname:MEGASUKA - SES LE SHEITANE

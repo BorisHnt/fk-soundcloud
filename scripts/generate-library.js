@@ -182,6 +182,44 @@ function parseBooleanFlag(value) {
   return null;
 }
 
+function parseDurationToSeconds(value) {
+  const source = String(value || "").trim();
+  if (!source) {
+    return null;
+  }
+
+  const parts = source.split(":").map((part) => Number.parseInt(part, 10));
+  if (parts.some((part) => !Number.isFinite(part) || part < 0)) {
+    return null;
+  }
+
+  if (parts.length === 3) {
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  }
+
+  if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  }
+
+  if (parts.length === 1) {
+    return parts[0];
+  }
+
+  return null;
+}
+
+function sumDurations(items) {
+  const durations = items
+    .map((item) => item?.duration)
+    .filter((duration) => Number.isFinite(duration) && duration > 0);
+
+  if (durations.length === 0) {
+    return null;
+  }
+
+  return durations.reduce((total, duration) => total + duration, 0);
+}
+
 function compareByDateDesc(left, right) {
   const rightDate = right.sortDate || "";
   const leftDate = left.sortDate || "";
@@ -344,6 +382,7 @@ function buildLibrary() {
           const trackDateOfCreation = getFirstNonEmpty(info.date_of_creation, dateOfCreation);
           const trackDateOfRelease = getFirstNonEmpty(info.date_of_release, dateOfRelease);
           const trackSortDate = getSortableDate(trackDateOfRelease, trackDateOfCreation, sortDate);
+          const trackDuration = parseDurationToSeconds(getFirstNonEmpty(info.duration, info.length));
           const trackId = ensureUniqueId(
             `track:${artistSlug}:${releaseSlug}:${String(trackNumber).padStart(2, "0")}-${trackSlug}`,
             usedTrackIds
@@ -375,7 +414,7 @@ function buildLibrary() {
             genre: trackGenres[0] || null,
             genres: trackGenres,
             sortDate: trackSortDate,
-            duration: null,
+            duration: trackDuration,
             trackNumber,
             href: `release.html?artist=${encodeURIComponent(artistSlug)}&release=${encodeURIComponent(releaseSlug)}`,
             shareUrl: `/release.html?artist=${encodeURIComponent(artistSlug)}&release=${encodeURIComponent(releaseSlug)}`,
@@ -406,6 +445,7 @@ function buildLibrary() {
         genres,
         releaseType,
         trackCount: releaseTrackIds.length,
+        duration: sumDurations(trackRecords),
         originalArtists,
         infoPath: releaseInfoFile ? toWebPath(path.join(releaseDirectory, releaseInfoFile)) : null,
         path: toWebPath(releaseDirectory),
@@ -451,6 +491,7 @@ function buildLibrary() {
       description: "Complete library across every artist and release.",
       coverPath: releases[0]?.coverPath || null,
       trackIds: tracks.map((track) => track.id),
+      duration: sumDurations(tracks),
       href: "playlist.html?type=all",
       shareUrl: "/playlist.html?type=all",
     },
@@ -464,6 +505,7 @@ function buildLibrary() {
       trackIds: tracks
         .filter((track) => Boolean(track.sortDate))
         .map((track) => track.id),
+      duration: sumDurations(tracks.filter((track) => Boolean(track.sortDate))),
       href: "playlist.html?type=latest",
       shareUrl: "/playlist.html?type=latest",
     },
@@ -476,6 +518,7 @@ function buildLibrary() {
       description: `Full playlist for ${artist.name}.`,
       coverPath: artist.coverPath,
       trackIds: artist.trackIds,
+      duration: sumDurations(artist.trackIds.map((trackId) => tracks.find((track) => track.id === trackId))),
       href: `playlist.html?type=artist&slug=${encodeURIComponent(artist.slug)}`,
       shareUrl: `/playlist.html?type=artist&slug=${encodeURIComponent(artist.slug)}`,
     })),
