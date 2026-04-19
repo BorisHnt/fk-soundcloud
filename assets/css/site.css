@@ -318,8 +318,8 @@ h3 {
 }
 
 .home-grid__main .card-grid--release-rail > .release-card {
-  flex-basis: calc((100% - 20px) / 3.14);
-  min-width: 196px;
+  flex-basis: calc((100% - 16px) / 3.32);
+  min-width: 188px;
 }
 
 .home-grid__main .release-card {
