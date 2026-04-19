@@ -186,6 +186,16 @@ h3 {
   min-width: 0;
 }
 
+.home-grid__main {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.home-grid__main > .section {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -238,6 +248,8 @@ h3 {
 .card-grid--release-rail {
   display: flex;
   flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
   min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
