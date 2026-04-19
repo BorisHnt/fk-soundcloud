@@ -52,14 +52,6 @@ function renderShell() {
   document.body.innerHTML = `
     <div class="site-shell">
       <header class="site-header">
-        <a class="brand" href="index.html" aria-label="FK Soundcloud home">
-          <span class="brand__mark">FK</span>
-          <span class="brand__copy">
-            <strong>FK Soundcloud</strong>
-            <small>Library</small>
-          </span>
-        </a>
-
         <nav class="site-nav" aria-label="Primary navigation">
           <a href="index.html" data-nav-link="home">Home</a>
           <a href="artists.html" data-nav-link="artists">Artists</a>

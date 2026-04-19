@@ -86,12 +86,16 @@ function enhanceLibrary(library) {
           (release) =>
             matcher(release.title) ||
             matcher(release.artist) ||
+            (release.originalArtists || []).some((artist) => matcher(artist)) ||
+            matcher(release.releaseType) ||
             release.genres.some((genre) => matcher(genre))
         ),
         tracks: library.tracks.filter(
           (track) =>
             matcher(track.title) ||
+            matcher(track.fullTitle) ||
             matcher(track.artist) ||
+            matcher(track.originalArtist) ||
             matcher(track.releaseTitle) ||
             track.genres.some((genre) => matcher(genre))
         ),

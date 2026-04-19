@@ -8,7 +8,7 @@ Site public:
 ## Ce que fait le projet
 
 - Scanne automatiquement `musics/ARTIST_NAME/RELEASE_NAME/`
-- Detecte les fichiers audio, la cover et `infos.txt`
+- Detecte les fichiers audio, la cover, les `.txt` de tracks et le `.txt` de release si present
 - Genere `data/library.json`
 - Construit un frontend pur HTML/CSS/JS avec:
   - page d'accueil
@@ -28,21 +28,33 @@ Chaque release doit ressembler a ceci:
 ```text
 musics/
   MEGASUKA/
-    BLACKPINK_-_JUMP_[MEGASUKA_RMX]/
-      BLACKPINK_-_JUMP_[MEGASUKA_RMX].mp3
-      infos.txt
+    JUMP [MEGASUKA RMX]/
+      JUMP [MEGASUKA RMX].mp3
+      JUMP [MEGASUKA RMX].txt
       cover.png
 ```
 
-Exemple de `infos.txt`:
+Exemple de `.txt` de track:
 
 ```text
 date_of_creation:2026-03-28
 date_of_release:2026-04-18
-genre:Hard_Techno
+genre:Hard Techno
+artist:MEGASUKA
+ogartist:BLACKPINK
+ep-lp:JUMP [MEGASUKA RMX] EP
+title:JUMP [MEGASUKA RMX]
+nberofthetrack:1
+fullname:BLACKPINK - JUMP [MEGASUKA RMX]
 ```
 
-Le generateur supporte aussi plusieurs fichiers audio dans un meme dossier de release. Le premier devient la piste principale.
+Regles actuelles:
+
+- un `.txt` par track, avec le meme nom de base que le fichier audio
+- un `.txt` de release/EP optionnel si besoin de metadata communes
+- `nberofthetrack` sert a ordonner les pistes dans la release
+- plusieurs fichiers audio dans un meme dossier sont supportes
+- l'ancien format `infos.txt` reste lu comme fallback
 
 ## Generer le catalogue
 

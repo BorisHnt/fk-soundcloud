@@ -9,7 +9,7 @@
   top: 0;
   z-index: 30;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 16px;
   width: var(--page-width);
@@ -21,54 +21,16 @@
   backdrop-filter: blur(12px);
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.brand__mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--surface-border-strong);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.brand__copy {
-  display: grid;
-  gap: 1px;
-  line-height: 1.15;
-}
-
-.brand__copy strong,
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
 }
 
-.brand__copy strong {
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.brand__copy small {
-  color: var(--text-muted);
-  font-size: 0.74rem;
-}
-
 .site-nav {
   display: inline-flex;
   align-items: center;
-  justify-self: center;
+  justify-self: start;
   gap: 4px;
   padding: 3px;
   border: 1px solid var(--surface-border);

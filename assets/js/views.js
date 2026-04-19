@@ -253,7 +253,9 @@ function renderRelease({ library, params }) {
           </div>
 
           <div class="meta-row meta-row--tight">
+            ${release.releaseType ? `<span>${escapeHtml(release.releaseType)}</span>` : ""}
             <span>${pluralize(tracks.length, "track")}</span>
+            ${release.originalArtists?.length ? `<span>orig. ${escapeHtml(release.originalArtists.join(", "))}</span>` : ""}
             ${release.dateOfCreation ? `<span>${escapeHtml(formatDate(release.dateOfCreation))}</span>` : ""}
             ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
           </div>
@@ -484,6 +486,8 @@ function createReleaseCard(release) {
           <p><a href="${escapeHtml(resolveArtistPath(release.artistSlug))}">${escapeHtml(release.artist)}</a></p>
         </div>
         <div class="meta-row meta-row--tight">
+          ${release.releaseType ? `<span>${escapeHtml(release.releaseType)}</span>` : ""}
+          ${release.trackCount ? `<span>${pluralize(release.trackCount, "track")}</span>` : ""}
           ${release.dateOfRelease ? `<span>${escapeHtml(formatDate(release.dateOfRelease))}</span>` : ""}
           ${release.genre ? `<span>${escapeHtml(release.genre)}</span>` : ""}
         </div>
@@ -554,6 +558,7 @@ function createTrackRow(track, options = {}) {
           <a href="${escapeHtml(resolveArtistPath(track.artistSlug))}">${escapeHtml(track.artist)}</a>
           &middot;
           <a href="${escapeHtml(releaseHref)}">${escapeHtml(track.releaseTitle)}</a>
+          ${track.originalArtist ? `&middot; orig. ${escapeHtml(track.originalArtist)}` : ""}
           ${track.genre ? `&middot; ${escapeHtml(track.genre)}` : ""}
         </span>
       </div>

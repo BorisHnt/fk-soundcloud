@@ -1,0 +1,10 @@
+date_of_creation:2026-03-28
+date_of_release:2026-04-18
+genre:Hard Techno
+artist:MEGASUKA
+remix:yes
+ogartist:BLACKPINK
+ep-lp:JUMP [MEGASUKA RMX] EP
+title:JUMP [MEGASUKA RMX]
+nberofthetrack:1
+fullname:BLACKPINK - JUMP [MEGASUKA RMX]

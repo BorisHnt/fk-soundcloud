@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-18T18:43:04.505Z",
+  "generatedAt": "2026-04-19T06:49:53.411Z",
   "source": "scripts/generate-library.js",
   "stats": {
     "artistCount": 1,
-    "releaseCount": 1,
-    "trackCount": 1,
+    "releaseCount": 2,
+    "trackCount": 2,
     "playlistCount": 3
   },
   "artists": [
@@ -13,18 +13,20 @@
       "name": "MEGASUKA",
       "slug": "megasuka",
       "path": "musics/MEGASUKA",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "genres": [
         "Hard Techno"
       ],
       "releaseIds": [
-        "release:megasuka:blackpink-jump-megasuka-rmx"
+        "release:megasuka:blackpink-jump-megasuka-rmx",
+        "release:megasuka:megasuka-ses-le-sheitane"
       ],
       "trackIds": [
-        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+        "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
       ],
-      "releaseCount": 1,
-      "trackCount": 1,
+      "releaseCount": 2,
+      "trackCount": 2,
       "latestReleaseDate": "2026-04-18",
       "href": "artist.html?slug=megasuka",
       "playlistHref": "playlist.html?type=artist&slug=megasuka"
@@ -34,40 +36,76 @@
     {
       "id": "release:megasuka:blackpink-jump-megasuka-rmx",
       "slug": "blackpink-jump-megasuka-rmx",
-      "title": "BLACKPINK - JUMP [MEGASUKA RMX]",
+      "title": "JUMP [MEGASUKA RMX] EP",
       "artist": "MEGASUKA",
       "artistSlug": "megasuka",
       "artistId": "artist:megasuka",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "dateOfCreation": "2026-03-28",
       "dateOfRelease": "2026-04-18",
       "genre": "Hard Techno",
       "genres": [
         "Hard Techno"
       ],
-      "infoPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/infos.txt",
-      "path": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]",
+      "releaseType": "EP",
+      "trackCount": 1,
+      "originalArtists": [
+        "BLACKPINK"
+      ],
+      "infoPath": null,
+      "path": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]",
       "sortDate": "2026-04-18",
       "trackIds": [
-        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+        "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx"
       ],
-      "primaryTrackId": "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx",
+      "primaryTrackId": "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
       "href": "release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx"
+    },
+    {
+      "id": "release:megasuka:megasuka-ses-le-sheitane",
+      "slug": "megasuka-ses-le-sheitane",
+      "title": "SES LE SHEITANE EP",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "coverPath": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE/SES LE SHEITANE.png",
+      "dateOfCreation": "2025-07-16",
+      "dateOfRelease": "2025-09-15",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "releaseType": "EP",
+      "trackCount": 1,
+      "originalArtists": [],
+      "infoPath": null,
+      "path": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE",
+      "sortDate": "2025-09-15",
+      "trackIds": [
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
+      ],
+      "primaryTrackId": "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+      "href": "release.html?artist=megasuka&release=megasuka-ses-le-sheitane"
     }
   ],
   "tracks": [
     {
-      "id": "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx",
-      "slug": "blackpink-jump-megasuka-rmx",
-      "title": "BLACKPINK - JUMP [MEGASUKA RMX]",
+      "id": "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
+      "slug": "jump-megasuka-rmx",
+      "title": "JUMP [MEGASUKA RMX]",
+      "fullTitle": "BLACKPINK - JUMP [MEGASUKA RMX]",
       "artist": "MEGASUKA",
       "artistSlug": "megasuka",
       "artistId": "artist:megasuka",
+      "originalArtist": "BLACKPINK",
+      "isRemix": true,
       "releaseId": "release:megasuka:blackpink-jump-megasuka-rmx",
       "releaseSlug": "blackpink-jump-megasuka-rmx",
-      "releaseTitle": "BLACKPINK - JUMP [MEGASUKA RMX]",
-      "audioPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/BLACKPINK_-_JUMP_[MEGASUKA_RMX].mp3",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "releaseTitle": "JUMP [MEGASUKA RMX] EP",
+      "releaseType": "EP",
+      "audioPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP [MEGASUKA RMX].mp3",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
+      "infoPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP [MEGASUKA RMX].txt",
       "dateOfCreation": "2026-03-28",
       "dateOfRelease": "2026-04-18",
       "genre": "Hard Techno",
@@ -79,6 +117,35 @@
       "trackNumber": 1,
       "href": "release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx",
       "shareUrl": "/release.html?artist=megasuka&release=blackpink-jump-megasuka-rmx"
+    },
+    {
+      "id": "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane",
+      "slug": "ses-le-sheitane",
+      "title": "SES LE SHEITANE",
+      "fullTitle": "MEGASUKA - SES LE SHEITANE",
+      "artist": "MEGASUKA",
+      "artistSlug": "megasuka",
+      "artistId": "artist:megasuka",
+      "originalArtist": null,
+      "isRemix": false,
+      "releaseId": "release:megasuka:megasuka-ses-le-sheitane",
+      "releaseSlug": "megasuka-ses-le-sheitane",
+      "releaseTitle": "SES LE SHEITANE EP",
+      "releaseType": "EP",
+      "audioPath": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE/SES LE SHEITANE.mp3",
+      "coverPath": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE/SES LE SHEITANE.png",
+      "infoPath": "musics/MEGASUKA/MEGASUKA - SES LE SHEITANE/SES LE SHEITANE.txt",
+      "dateOfCreation": "2025-07-16",
+      "dateOfRelease": "2025-09-15",
+      "genre": "Hard Techno",
+      "genres": [
+        "Hard Techno"
+      ],
+      "sortDate": "2025-09-15",
+      "duration": null,
+      "trackNumber": 1,
+      "href": "release.html?artist=megasuka&release=megasuka-ses-le-sheitane",
+      "shareUrl": "/release.html?artist=megasuka&release=megasuka-ses-le-sheitane"
     }
   ],
   "playlists": [
@@ -88,9 +155,10 @@
       "title": "All Tracks",
       "slug": "all-tracks",
       "description": "Complete library across every artist and release.",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
-        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+        "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
       ],
       "href": "playlist.html?type=all",
       "shareUrl": "/playlist.html?type=all"
@@ -101,9 +169,10 @@
       "title": "Latest Releases",
       "slug": "latest-releases",
       "description": "Newest tracks ordered by release date.",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
-        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+        "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
       ],
       "href": "playlist.html?type=latest",
       "shareUrl": "/playlist.html?type=latest"
@@ -115,9 +184,10 @@
       "slug": "megasuka",
       "artistSlug": "megasuka",
       "description": "Full playlist for MEGASUKA.",
-      "coverPath": "musics/MEGASUKA/BLACKPINK_-_JUMP_[MEGASUKA_RMX]/JUMP.png",
+      "coverPath": "musics/MEGASUKA/BLACKPINK - JUMP [MEGASUKA RMX]/JUMP.png",
       "trackIds": [
-        "track:megasuka:blackpink-jump-megasuka-rmx:blackpink-jump-megasuka-rmx"
+        "track:megasuka:blackpink-jump-megasuka-rmx:01-jump-megasuka-rmx",
+        "track:megasuka:megasuka-ses-le-sheitane:01-ses-le-sheitane"
       ],
       "href": "playlist.html?type=artist&slug=megasuka",
       "shareUrl": "/playlist.html?type=artist&slug=megasuka"
