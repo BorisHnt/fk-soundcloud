@@ -21,6 +21,7 @@
   --page-width: min(1240px, calc(100vw - 32px));
   --header-height: 58px;
   --player-height: 86px;
+  --page-bottom-clearance: 60px;
   --font-body: "Instrument Sans", "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", "Instrument Sans", sans-serif;
 }
