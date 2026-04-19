@@ -287,12 +287,12 @@ h3 {
 
 .release-rail__nav-wrap {
   position: absolute;
-  top: 0;
-  bottom: 14px;
+  top: -2px;
+  bottom: -10px;
   z-index: 3;
   display: flex;
   align-items: center;
-  width: 54px;
+  width: 64px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 160ms ease;
@@ -303,8 +303,6 @@ h3 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
 
 .release-rail__nav-wrap--prev {
@@ -313,7 +311,7 @@ h3 {
 }
 
 .release-rail__nav-wrap--prev::before {
-  background: linear-gradient(90deg, rgba(10, 12, 15, 0.92) 0%, rgba(10, 12, 15, 0.72) 52%, rgba(10, 12, 15, 0) 100%);
+  background: linear-gradient(90deg, rgba(10, 12, 15, 0.98) 0%, rgba(10, 12, 15, 0.96) 24%, rgba(10, 12, 15, 0.86) 52%, rgba(10, 12, 15, 0.46) 78%, rgba(10, 12, 15, 0) 100%);
 }
 
 .release-rail__nav-wrap--next {
@@ -322,7 +320,7 @@ h3 {
 }
 
 .release-rail__nav-wrap--next::before {
-  background: linear-gradient(270deg, rgba(10, 12, 15, 0.92) 0%, rgba(10, 12, 15, 0.72) 52%, rgba(10, 12, 15, 0) 100%);
+  background: linear-gradient(270deg, rgba(10, 12, 15, 0.98) 0%, rgba(10, 12, 15, 0.96) 24%, rgba(10, 12, 15, 0.86) 52%, rgba(10, 12, 15, 0.46) 78%, rgba(10, 12, 15, 0) 100%);
 }
 
 .release-rail.is-scrollable.has-prev .release-rail__nav-wrap--prev,
