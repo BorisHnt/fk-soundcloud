@@ -294,6 +294,10 @@ h3 {
   font-size: 0.86rem;
 }
 
+.release-card .meta-row {
+  font-size: 0.78rem;
+}
+
 .release-card,
 .playlist-card,
 .artist-card {
