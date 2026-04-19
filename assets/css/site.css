@@ -248,6 +248,8 @@ h3 {
 .release-rail {
   position: relative;
   min-width: 0;
+  --rail-prev-opacity: 0;
+  --rail-next-opacity: 0;
 }
 
 .card-grid--release-rail {
@@ -293,9 +295,8 @@ h3 {
   display: flex;
   align-items: center;
   width: 64px;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 160ms ease;
+  transition: opacity 90ms linear;
 }
 
 .release-rail__nav-wrap::before {
@@ -308,6 +309,7 @@ h3 {
 .release-rail__nav-wrap--prev {
   left: 0;
   justify-content: flex-start;
+  opacity: var(--rail-prev-opacity);
 }
 
 .release-rail__nav-wrap--prev::before {
@@ -317,16 +319,11 @@ h3 {
 .release-rail__nav-wrap--next {
   right: 0;
   justify-content: flex-end;
+  opacity: var(--rail-next-opacity);
 }
 
 .release-rail__nav-wrap--next::before {
   background: linear-gradient(270deg, rgba(10, 12, 15, 0.98) 0%, rgba(10, 12, 15, 0.96) 24%, rgba(10, 12, 15, 0.86) 52%, rgba(10, 12, 15, 0.46) 78%, rgba(10, 12, 15, 0) 100%);
-}
-
-.release-rail.is-scrollable.has-prev .release-rail__nav-wrap--prev,
-.release-rail.is-scrollable.has-next .release-rail__nav-wrap--next {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .release-rail__nav {
@@ -344,11 +341,18 @@ h3 {
   color: var(--text);
   cursor: pointer;
   transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+  pointer-events: auto;
 }
 
 .release-rail__nav:hover {
   background: var(--surface-strong);
   transform: translateY(-1px);
+}
+
+.release-rail__nav:disabled {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
 }
 
 .release-rail__nav svg {

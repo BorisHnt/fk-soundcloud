@@ -522,15 +522,31 @@ function setupReleaseRails(root) {
       continue;
     }
 
+    let frameId = 0;
+
     const syncState = () => {
       const maxScrollLeft = Math.max(0, track.scrollWidth - track.clientWidth);
       const canScroll = maxScrollLeft > 6;
-      const hasPrev = canScroll && track.scrollLeft > 6;
-      const hasNext = canScroll && track.scrollLeft < maxScrollLeft - 6;
+      const fadeDistance = Math.max(56, Math.min(104, track.clientWidth * 0.18));
+      const prevStrength = canScroll ? Math.max(0, Math.min(1, track.scrollLeft / fadeDistance)) : 0;
+      const nextStrength = canScroll ? Math.max(0, Math.min(1, (maxScrollLeft - track.scrollLeft) / fadeDistance)) : 0;
 
       rail.classList.toggle("is-scrollable", canScroll);
-      rail.classList.toggle("has-prev", hasPrev);
-      rail.classList.toggle("has-next", hasNext);
+      rail.style.setProperty("--rail-prev-opacity", prevStrength.toFixed(3));
+      rail.style.setProperty("--rail-next-opacity", nextStrength.toFixed(3));
+      prevButton.disabled = prevStrength < 0.08;
+      nextButton.disabled = nextStrength < 0.08;
+    };
+
+    const scheduleSync = () => {
+      if (frameId) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = 0;
+        syncState();
+      });
     };
 
     const scrollByCard = (direction) => {
@@ -547,7 +563,7 @@ function setupReleaseRails(root) {
 
     const handlePrev = () => scrollByCard(-1);
     const handleNext = () => scrollByCard(1);
-    const handleScroll = () => syncState();
+    const handleScroll = () => scheduleSync();
 
     prevButton.addEventListener("click", handlePrev);
     nextButton.addEventListener("click", handleNext);
@@ -555,10 +571,10 @@ function setupReleaseRails(root) {
 
     let resizeObserver = null;
     if (typeof ResizeObserver === "function") {
-      resizeObserver = new ResizeObserver(() => syncState());
+      resizeObserver = new ResizeObserver(() => scheduleSync());
       resizeObserver.observe(track);
     } else {
-      window.addEventListener("resize", syncState);
+      window.addEventListener("resize", scheduleSync);
     }
 
     syncState();
@@ -571,7 +587,11 @@ function setupReleaseRails(root) {
       if (resizeObserver) {
         resizeObserver.disconnect();
       } else {
-        window.removeEventListener("resize", syncState);
+        window.removeEventListener("resize", scheduleSync);
+      }
+
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
       }
     });
   }
