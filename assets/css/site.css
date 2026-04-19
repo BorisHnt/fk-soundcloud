@@ -231,7 +231,38 @@ h3 {
 }
 
 .card-grid--releases {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card-grid--release-rail {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-border-strong) transparent;
+  overscroll-behavior-x: contain;
+}
+
+.card-grid--release-rail > .release-card {
+  flex: 0 0 calc((100% - 24px) / 3);
+  min-width: 220px;
+  scroll-snap-align: start;
+}
+
+.card-grid--release-rail::-webkit-scrollbar {
+  height: 8px;
+}
+
+.card-grid--release-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-grid--release-rail::-webkit-scrollbar-thumb {
+  background: var(--surface-border-strong);
+  border-radius: 999px;
 }
 
 .card-grid--artists-page {
@@ -739,6 +770,10 @@ input[type="range"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .card-grid--release-rail > .release-card {
+    flex-basis: calc((100% - 24px) / 3);
+  }
+
   .card-grid--artists-page {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -754,6 +789,10 @@ input[type="range"] {
 
   .card-grid--releases {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card-grid--release-rail > .release-card {
+    flex-basis: calc((100% - 12px) / 2);
   }
 }
 
@@ -795,6 +834,11 @@ input[type="range"] {
   .card-grid--releases,
   .card-grid--artists-page {
     grid-template-columns: 1fr;
+  }
+
+  .card-grid--release-rail > .release-card {
+    flex-basis: 100%;
+    min-width: min(100%, 320px);
   }
 
   .track-row {

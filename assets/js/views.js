@@ -63,7 +63,7 @@ function renderHome({ library }) {
         <div class="home-grid__main">
           <section class="section section--flush">
             ${createSectionHeader("Latest releases", null, "artists.html", "Artists")}
-            <div class="card-grid card-grid--releases">
+            <div class="${escapeHtml(getReleaseGridClassName(latestReleases))}">
               ${latestReleases.map((release) => createReleaseCard(release)).join("")}
             </div>
           </section>
@@ -199,7 +199,7 @@ function renderArtist({ library, params }) {
 
       <section class="section">
         ${createSectionHeader("Releases", null, null, null)}
-        <div class="card-grid card-grid--releases">
+        <div class="${escapeHtml(getReleaseGridClassName(releases))}">
           ${releases.map((release) => createReleaseCard(release)).join("")}
         </div>
       </section>
@@ -474,6 +474,10 @@ function createSectionHeader(title, description, href, label) {
       ${href && label ? `<a class="inline-link" href="${escapeHtml(href)}">${escapeHtml(label)}</a>` : ""}
     </div>
   `;
+}
+
+function getReleaseGridClassName(releases) {
+  return `card-grid card-grid--releases${(releases?.length || 0) > 3 ? " card-grid--release-rail" : ""}`;
 }
 
 function createReleaseCard(release) {
